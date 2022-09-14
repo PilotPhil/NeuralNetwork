@@ -1,10 +1,9 @@
 import mnist
-import numpy
 import numpy as np
 import cv2
-from core.Conv3x3 import Conv3x3
-from core.MaxPool2 import MaxPool2
-from core.Softmax import Softmax
+from raw_numDet.core.Conv3x3 import Conv3x3
+from raw_numDet.core.MaxPool2 import MaxPool2
+from raw_numDet.core.Softmax import Softmax
 
 # We only use the first 1k testing examples (out of 10k total)
 # in the interest of time. Feel free to change this if you want.
@@ -15,7 +14,7 @@ conv = Conv3x3(8)  # 28x28x1 -> 26x26x8
 pool = MaxPool2()  # 26x26x8 -> 13x13x8
 softmax = Softmax(13 * 13 * 8, 10)  # 13x13x8 -> 10
 
-weight_file = './weights/weight_34_0.001.npz'
+weight_file = 'weights/weight_34_0.001.npz'
 data = np.load(weight_file)
 conv.filters = data['filter']
 softmax.weights = data['weights']

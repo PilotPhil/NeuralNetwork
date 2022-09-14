@@ -1,8 +1,8 @@
 import mnist
 import numpy as np
-from core.Conv3x3 import Conv3x3
-from core.MaxPool2 import MaxPool2
-from core.Softmax import Softmax
+from raw_numDet.core.Conv3x3 import Conv3x3
+from raw_numDet.core.MaxPool2 import MaxPool2
+from raw_numDet.core.Softmax import Softmax
 
 # We only use the first 1k examples of each set in the interest of time.
 # Feel free to change this if you want.

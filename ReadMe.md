@@ -15,9 +15,10 @@ python ./train.py
 python ./eval
 ```
 
-modify the line in eval.py(line 18): 
+modify the line in eval.py(line 18):
+
 ```python
-weight_file = './weights/weight_17_0.008.npz'
+weight_file = 'raw_numDet/weights/weight_17_0.008.npz'
 ```
 to choose your weights
 
