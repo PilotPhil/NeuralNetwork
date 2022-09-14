@@ -26,10 +26,10 @@ def mplot(idx):
 
 
 if __name__ == '__main__':
-    testEpoch = 10
+    testEpoch = 10000
     dataset = Dataset(train_num=0, test_num=testEpoch)
 
-    weightPath = r'C:\Users\dwb\Desktop\NumberDetection\Quadrant\weights\epoch198000loss0.7519093751907349.pt'
+    weightPath = r'C:\Users\dwb\Desktop\NeuralNetwork\Quadrant\weights\epoch4700loss0.0.pt'
     net = torch.load(weightPath)
 
     success_num = 0

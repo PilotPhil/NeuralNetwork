@@ -15,7 +15,7 @@ test_labels = mnist.train_labels()[1000:2000]
 # test_labels = mnist.train_labels()[:1000]
 
 if __name__ == '__main__':
-    weightsPath = r'C:\Users\dwb\Desktop\NeuralNetwork\NumberDetection\weights\epoch950loss2.3032244556020487e-08.pt'
+    weightsPath = r'C:\Users\dwb\Desktop\NeuralNetwork\NumberDetection\weights\epoch800loss2.0278214662994287e-08.pt'
     net = torch.load(weightsPath)
 
     isShowCvWindow = False

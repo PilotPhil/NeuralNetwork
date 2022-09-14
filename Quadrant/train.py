@@ -8,12 +8,14 @@ import matplotlib.pyplot as plt
 if __name__ == '__main__':
     net = QuadrantNet()
 
-    trainEpoch = 200000
+    trainEpoch = 5001
     testEpoch = 50
     dataset = Dataset(trainEpoch, testEpoch)
 
     # optimizer
-    optimizer = torch.optim.SGD(net.parameters(), lr=0.0001)
+    # optimizer = torch.optim.SGD(net.parameters(), lr=0.0001)
+    optimizer = torch.optim.Adam(net.parameters(), lr=0.001, betas=(0.9, 0.999), eps=1e-08, weight_decay=0,
+                                 amsgrad=False)
     loss_list = []
     last_loss = 100.0
 
@@ -24,25 +26,37 @@ if __name__ == '__main__':
 
         trainData, trainLabel = dataset.getTrainDataLabel(e)
         output = net(trainData)
-        loss = net.criterion(output, trainLabel)
+
+        # use CrossEntropyLoss
+        # loss = net.criterion(output, trainLabel)
+
+        # use MSELoss
+        target = torch.zeros(1, 4)
+        target[0, trainLabel] = 1
+        loss = net.criterion(output, target)
+
         optimizer.zero_grad()
         loss.backward()
         optimizer.step()
         loss_list.append(loss.item())
-        print('loss: ' + str(loss))
+        print('loss: ' + str(loss.item()))
 
-        if loss.item() < last_loss and e % 2000 == 0:
-            modelName = './weights/epoch' + str(e) + 'loss' + str(loss.item()) + '.pt'
+        if loss.item() < last_loss and e % 100 == 0:
+            modelName = './weights/epoch' + str(e) + 'loss' + str(round(loss.item(), 4)) + '.pt'
             torch.save(net, modelName)
 
-        last_loss=loss.item()
+        last_loss = loss.item()
 
     minLoss = min(loss_list)
     print('minLoss: ' + str(minLoss))
 
     print('------- finished train!!! -------')
 
-    plt.plot(range(trainEpoch), loss_list)
+    font1 = {'family': 'serif', 'color': 'blue', 'size': 20}
+    font2 = {'family': 'serif', 'color': 'darkred', 'size': 15}
+    plt.plot(range(trainEpoch), loss_list, '-b')
+    plt.xlabel('epoch', fontdict=font2)
+    plt.ylabel('loss', fontdict=font2)
     plt.show()
 
     # # test

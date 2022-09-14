@@ -7,14 +7,13 @@ class QuadrantNet(nn.Module):
     def __init__(self):
         super(QuadrantNet, self).__init__()
 
-        self.criterion = nn.CrossEntropyLoss()
+        # self.criterion = nn.CrossEntropyLoss()
+        self.criterion = nn.MSELoss()
 
         self.model = nn.Sequential(
-            nn.Linear(2, 10),
+            nn.Linear(2, 12),
             nn.ReLU(),
-            nn.Linear(10, 20),
-            nn.ReLU(),
-            nn.Linear(20, 4),
+            nn.Linear(12, 4),
             nn.Softmax(dim=1)
         )
 
