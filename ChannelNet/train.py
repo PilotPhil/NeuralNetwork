@@ -10,8 +10,9 @@ testEpoch = 50
 net = VGG16(8)
 dataset = Dataset(trainEpoch, testEpoch, 224)
 
-optimizer = torch.optim.Adam(net.parameters(), lr=0.01, betas=(0.9, 0.999), eps=1e-08, weight_decay=0,
-                                 amsgrad=False)
+optimizer = torch.optim.Adam(net.parameters(), lr=0.001, betas=(0.9, 0.999), eps=1e-08, weight_decay=0,amsgrad=False)
+# optimizer = torch.optim.SGD(net.parameters(), lr=0.0001)
+
 loss_list = []
 last_loss = 100.0
 
